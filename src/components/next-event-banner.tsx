@@ -27,9 +27,9 @@ export function NextEventBanner({ bookHref = "/#contacto" }: Props) {
     <div
       role="region"
       aria-label="Próximo evento"
-      className="bg-promo px-4 py-2.5 text-center text-sm text-promo-foreground md:text-base"
+      className="border-b border-promo-accent/30 bg-promo px-4 py-2.5 text-center text-sm text-promo-foreground md:text-base"
     >
-      <span className="font-semibold uppercase">Próximo evento:</span>{" "}
+      <span className="font-semibold uppercase text-promo-accent">Próximo evento:</span>{" "}
       <span>
         {event.name}
         {alpha2 && <>, {countryName(alpha2)}</>}
@@ -46,7 +46,7 @@ export function NextEventBanner({ bookHref = "/#contacto" }: Props) {
       <span className="mx-2">|</span>
       <span>A partir de {format(date, "d 'de' MMMM 'de' yyyy", { locale: pt })}</span>
       <span className="mx-2">|</span>
-      <a href={bookHref} className="font-medium underline underline-offset-2 hover:opacity-80">
+      <a href={bookHref} className="font-medium text-promo-accent underline underline-offset-2 hover:opacity-80">
         Reservar
       </a>
     </div>
