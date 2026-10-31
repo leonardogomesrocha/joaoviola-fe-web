@@ -28,6 +28,7 @@
   --color-promo: var(--promo);
   --color-promo-foreground: var(--promo-foreground);
   --color-promo-accent: var(--promo-accent);
+  --color-pool: var(--pool);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -99,6 +100,8 @@
   --promo: oklch(0.246 0.051 249.8);
   --promo-foreground: oklch(0.946 0.009 242.8);
   --promo-accent: oklch(0.758 0.147 80.8);
+  --pool: oklch(0.6 0.12 225);
+  --gradient-pool: linear-gradient(135deg, oklch(0.72 0.12 210) 0%, oklch(0.5 0.13 240) 100%);
   --gradient-hero: linear-gradient(90deg, oklch(0.14 0.03 250 / 0.92) 0%, oklch(0.14 0.03 250 / 0.55) 55%, transparent 100%);
   --shadow-gold: 0 18px 40px -18px oklch(0.72 0.14 75 / 0.7);
   --chart-1: oklch(0.646 0.222 41.116);

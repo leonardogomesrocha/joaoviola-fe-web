@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Mail, Phone, Waves } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
+import { OfferSection } from "@/components/private-lessons/offer-section";
+import { TestimonialsSection } from "@/components/private-lessons/testimonials-section";
 import { SiteHeader } from "@/components/site-header";
 import { useLocale, useMessages } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
@@ -47,27 +49,19 @@ function PrivateLessons() {
       <SiteHeader brand={data.brand} />
 
       <section className="bg-ink text-ink-foreground">
-        <div className="container mx-auto max-w-5xl px-6 py-20">
-          <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">{t.eyebrow}</p>
-          <h1 className="mt-4 max-w-2xl text-5xl font-bold leading-[1.05] md:text-6xl">
-            {t.title}
+        <div className="container mx-auto max-w-6xl px-6 py-20">
+          <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">
+            {t.hero.eyebrow}
+          </p>
+          <h1 className="mt-4 max-w-2xl text-4xl font-bold leading-[1.05] sm:text-5xl md:text-6xl">
+            {t.hero.title}
           </h1>
-          <p className="mt-6 max-w-xl text-lg opacity-85">{t.intro}</p>
+          <p className="mt-6 max-w-xl text-lg opacity-85">{t.hero.intro}</p>
         </div>
       </section>
 
-      <main className="container mx-auto max-w-5xl px-6">
-        <section className="py-20">
-          <SectionTitle>{t.includesTitle}</SectionTitle>
-          <ul className="grid gap-4 md:grid-cols-2">
-            {t.features.map((feature) => (
-              <li key={feature} className="flex items-start gap-4 rounded-xl bg-card p-5">
-                <Waves className="mt-0.5 size-5 shrink-0 text-gold" />
-                <span>{feature}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
+      <main className="container mx-auto max-w-6xl px-6">
+        <OfferSection />
 
         <section className="pb-20">
           <SectionTitle>{common.conditionsTitle}</SectionTitle>
@@ -82,6 +76,7 @@ function PrivateLessons() {
             ))}
           </ul>
         </section>
+        <TestimonialsSection />
       </main>
 
       <footer id="contacto" className="bg-ink text-ink-foreground">
