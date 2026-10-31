@@ -9,7 +9,7 @@ export type NextEvent = {
   countryPrefix: string;
 };
 
-const API_URL = (import.meta.env.VITE_API_URL ?? "http://localhost:5003").replace(/\/$/, "");
+const API_URL = (import.meta.env.VITE_API_URL ?? "https://syrcgate.com").replace(/\/$/, "");
 
 /** Returns the next event, or null when there is none (404) or this site isn't allowed (403). */
 export async function getNextEvent(): Promise<NextEvent | null> {

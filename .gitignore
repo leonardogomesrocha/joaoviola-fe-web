@@ -11,7 +11,7 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 # Runtime data
 pids
-*.pid
+*.run
 *.seed
 *.pid.lock
 
@@ -81,7 +81,7 @@ out
 # Nuxt.js build / generate output
 .nuxt
 dist
-.output
+.outputrun
 
 # Gatsby files
 .cache/
@@ -147,4 +147,3 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
-run-local.bat
