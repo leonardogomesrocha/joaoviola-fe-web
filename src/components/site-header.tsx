@@ -1,4 +1,6 @@
 import { Link } from "@tanstack/react-router";
+import { useMessages } from "@/i18n";
+import { commonMessages } from "@/i18n/messages/common";
 
 type Props = {
   brand: string;
@@ -6,13 +8,9 @@ type Props = {
   overlay?: boolean;
 };
 
-const links = [
-  { href: "/#planos", label: "Planos" },
-  { href: "/#condicoes", label: "Condições" },
-  { href: "/#contacto", label: "Contacto" },
-];
-
 export function SiteHeader({ brand, overlay = false }: Props) {
+  const t = useMessages(commonMessages).nav;
+
   return (
     <header className={overlay ? "absolute inset-x-0 top-0 z-10" : "bg-ink"}>
       <nav className="container mx-auto flex items-center justify-between px-6 py-5 text-ink-foreground">
@@ -20,21 +18,22 @@ export function SiteHeader({ brand, overlay = false }: Props) {
           {brand}
         </Link>
         <div className="hidden gap-8 text-sm font-medium uppercase tracking-wider md:flex">
-          <a href={links[0].href} className="hover:text-gold">
-            {links[0].label}
+          <a href="/#planos" className="hover:text-gold">
+            {t.plans}
           </a>
           <Link
             to="/private-lessons"
             className="hover:text-gold"
             activeProps={{ className: "text-gold" }}
           >
-            Aulas Particulares
+            {t.privateLessons}
           </Link>
-          {links.slice(1).map((link) => (
-            <a key={link.href} href={link.href} className="hover:text-gold">
-              {link.label}
-            </a>
-          ))}
+          <a href="/#condicoes" className="hover:text-gold">
+            {t.conditions}
+          </a>
+          <a href="#contacto" className="hover:text-gold">
+            {t.contact}
+          </a>
         </div>
       </nav>
     </header>

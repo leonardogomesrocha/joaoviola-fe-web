@@ -1,62 +1,66 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { Mail, Phone, Waves } from "lucide-react";
-import { NextEventBanner } from "@/components/next-event-banner";
 import { SiteHeader } from "@/components/site-header";
-import { getStudioData } from "@/lib/studio-data";
-
-const studioQuery = queryOptions({ queryKey: ["studio"], queryFn: getStudioData });
+import { useLocale, useMessages } from "@/i18n";
+import { commonMessages } from "@/i18n/messages/common";
+import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
+import { studioQuery } from "@/lib/studio-query";
 
 export const Route = createFileRoute("/private-lessons")({
-  head: () => ({
-    meta: [
-      { title: "Aulas Particulares — Grupo Viola" },
-      {
-        name: "description",
-        content:
-          "Aulas particulares de natação em piscina e águas abertas com o treinador João Viola.",
-      },
-      { property: "og:title", content: "Aulas Particulares — Grupo Viola" },
-      {
-        property: "og:description",
-        content: "Aulas particulares de natação em piscina e águas abertas.",
-      },
-    ],
-  }),
-  loader: ({ context }) => context.queryClient.ensureQueryData(studioQuery),
+  loader: async ({ context }) => {
+    await context.queryClient.ensureQueryData(studioQuery(context.locale));
+    return { locale: context.locale };
+  },
+  head: ({ loaderData }) => {
+    const t = privateLessonsMessages[loaderData?.locale ?? "pt"].meta;
+    return {
+      meta: [
+        { title: t.title },
+        { name: "description", content: t.description },
+        { property: "og:title", content: t.title },
+        { property: "og:description", content: t.description },
+      ],
+    };
+  },
   component: PrivateLessons,
 });
 
+function SectionTitle({ children }: { children: string }) {
+  return (
+    <div className="mb-10 flex items-center gap-4">
+      <span className="h-px flex-1 bg-gold" />
+      <h2 className="text-3xl font-bold md:text-4xl">{children}</h2>
+      <span className="h-px flex-1 bg-gold" />
+    </div>
+  );
+}
+
 function PrivateLessons() {
-  const { data } = useSuspenseQuery(studioQuery);
-  const { privateLessons: lessons, contact } = data;
+  const { data } = useSuspenseQuery(studioQuery(useLocale()));
+  const t = useMessages(privateLessonsMessages);
+  const common = useMessages(commonMessages);
+  const { contact } = data;
 
   return (
     <div className="min-h-screen">
-      <NextEventBanner bookHref="#contacto" />
       <SiteHeader brand={data.brand} />
 
       <section className="bg-ink text-ink-foreground">
         <div className="container mx-auto max-w-5xl px-6 py-20">
-          <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">
-            {lessons.eyebrow}
-          </p>
+          <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">{t.eyebrow}</p>
           <h1 className="mt-4 max-w-2xl text-5xl font-bold leading-[1.05] md:text-6xl">
-            {lessons.title}
+            {t.title}
           </h1>
-          <p className="mt-6 max-w-xl text-lg opacity-85">{lessons.intro}</p>
+          <p className="mt-6 max-w-xl text-lg opacity-85">{t.intro}</p>
         </div>
       </section>
 
       <main className="container mx-auto max-w-5xl px-6">
         <section className="py-20">
-          <div className="mb-10 flex items-center gap-4">
-            <span className="h-px flex-1 bg-gold" />
-            <h2 className="text-3xl font-bold md:text-4xl">O que inclui</h2>
-            <span className="h-px flex-1 bg-gold" />
-          </div>
+          <SectionTitle>{t.includesTitle}</SectionTitle>
           <ul className="grid gap-4 md:grid-cols-2">
-            {lessons.features.map((feature) => (
+            {t.features.map((feature) => (
               <li key={feature} className="flex items-start gap-4 rounded-xl bg-card p-5">
                 <Waves className="mt-0.5 size-5 shrink-0 text-gold" />
                 <span>{feature}</span>
@@ -66,11 +70,7 @@ function PrivateLessons() {
         </section>
 
         <section className="pb-20">
-          <div className="mb-10 flex items-center gap-4">
-            <span className="h-px flex-1 bg-gold" />
-            <h2 className="text-3xl font-bold md:text-4xl">Condições</h2>
-            <span className="h-px flex-1 bg-gold" />
-          </div>
+          <SectionTitle>{common.conditionsTitle}</SectionTitle>
           <ul className="grid gap-4 md:grid-cols-2">
             {data.conditions.map((c, i) => (
               <li key={i} className="flex gap-4 rounded-xl border p-5">
@@ -87,8 +87,8 @@ function PrivateLessons() {
       <footer id="contacto" className="bg-ink text-ink-foreground">
         <div className="container mx-auto grid max-w-5xl gap-8 px-6 py-16 md:grid-cols-2">
           <div>
-            <h2 className="text-3xl font-bold text-gold">Marca a tua aula</h2>
-            <p className="mt-3 opacity-75">Fala connosco para combinar horário e local.</p>
+            <h2 className="text-3xl font-bold text-gold">{t.contact.title}</h2>
+            <p className="mt-3 opacity-75">{t.contact.text}</p>
           </div>
           <ul className="space-y-4 text-lg">
             <li>
