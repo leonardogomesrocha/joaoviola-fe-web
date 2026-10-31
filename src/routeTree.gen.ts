@@ -1,4 +1,4 @@
-* eslint-disable */
+/* eslint-disable */
 
 // @ts-nocheck
 
@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PrivateLessonsRouteImport } from './routes/private-lessons'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivateLessonsRoute = PrivateLessonsRouteImport.update({
+  id: '/private-lessons',
+  path: '/private-lessons',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/private-lessons': typeof PrivateLessonsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/private-lessons': typeof PrivateLessonsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/private-lessons': typeof PrivateLessonsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/private-lessons'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/private-lessons'
+  id: '__root__' | '/' | '/private-lessons'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  PrivateLessonsRoute: typeof PrivateLessonsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +58,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/private-lessons': {
+      id: '/private-lessons'
+      path: '/private-lessons'
+      fullPath: '/private-lessons'
+      preLoaderRoute: typeof PrivateLessonsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  PrivateLessonsRoute: PrivateLessonsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

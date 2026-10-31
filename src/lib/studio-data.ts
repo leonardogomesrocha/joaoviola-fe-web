@@ -13,12 +13,20 @@ export type Plan = {
 
 export type Contact = { phone: string; email: string; instagram: string };
 
+export type PrivateLessons = {
+  eyebrow: string;
+  title: string;
+  intro: string;
+  features: string[];
+};
+
 export type StudioData = {
   brand: string;
   tagline: string;
   plansTitle: string;
   plans: Plan[];
   conditions: string[];
+  privateLessons: PrivateLessons;
   contact: Contact;
 };
 
@@ -61,6 +69,18 @@ export const studioData: StudioData = {
     "O cancelamento no próprio dia implica a cobrança integral da sessão.",
     "Nos planos de treino online, os objetivos, a metodologia e a periodicidade da comunicação são definidos previamente entre treinador e atleta.",
   ],
+  privateLessons: {
+    eyebrow: "Piscina · Águas abertas",
+    title: "Aulas Particulares",
+    intro:
+      "Sessões individuais de natação adaptadas ao teu nível e aos teus objetivos, com acompanhamento direto do treinador João Viola.",
+    features: [
+      "Sessões individuais de 60 minutos",
+      "Correção técnica personalizada",
+      "Treino em piscina ou em águas abertas",
+      "Plano de evolução adaptado aos teus objetivos",
+    ],
+  },
   contact: {
     phone: "916 493 947",
     email: "geral.grupoviola@gmail.com",

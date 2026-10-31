@@ -3,6 +3,8 @@ import { queryOptions, useSuspenseQuery } from "@tanstack/react-query";
 import { Timer, Dumbbell, Phone, Mail, Instagram, ArrowRight } from "lucide-react";
 import hero from "@/assets/hero.jpg";
 import { getStudioData, type Plan } from "@/lib/studio-data";
+import { NextEventBanner } from "@/components/next-event-banner";
+import { SiteHeader } from "@/components/site-header";
 
 const studioQuery = queryOptions({ queryKey: ["studio"], queryFn: getStudioData });
 
@@ -59,16 +61,9 @@ function Index() {
   const { contact } = data;
   return (
     <div className="min-h-screen">
-      <header className="absolute inset-x-0 top-0 z-10">
-        <nav className="container mx-auto flex items-center justify-between px-6 py-5 text-ink-foreground">
-          <span className="font-display text-xl font-bold uppercase tracking-wider">{data.brand}</span>
-          <div className="hidden gap-8 text-sm font-medium uppercase tracking-wider md:flex">
-            <a href="#planos" className="hover:text-gold">Planos</a>
-            <a href="#condicoes" className="hover:text-gold">Condições</a>
-            <a href="#contacto" className="hover:text-gold">Contacto</a>
-          </div>
-        </nav>
-      </header>
+      <NextEventBanner />
+      <div className="relative">
+        <SiteHeader brand={data.brand} overlay />
 
       <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-ink">
         <img src={hero} alt="Nadador em águas abertas ao pôr do sol" width={1920} height={1088} className="absolute inset-0 size-full object-cover" />
@@ -82,6 +77,7 @@ function Index() {
           </a>
         </div>
       </section>
+      </div>
 
       <main className="container mx-auto max-w-5xl px-6">
         <section id="planos" className="scroll-mt-10 py-20">

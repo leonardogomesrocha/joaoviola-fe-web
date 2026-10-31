@@ -15,3 +15,10 @@ describe("App routing", () => {
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
 });
+
+describe("Private lessons route", () => {
+  it("matches a page for /private-lessons", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/private-lessons").at(-1)?.routeId).toBe("/private-lessons");
+  });
+});
