@@ -4,7 +4,7 @@ import { enGB, es, pt } from "date-fns/locale";
 import { localeInfo, useLocale, useMessages, type Locale } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
 import { countryName, flagUrl, toAlpha2 } from "@/lib/country-flag";
-import { getNextEvent } from "@/lib/events-api";
+import { siteConfigQuery } from "@/lib/site-config-api";
 
 const dateLocales: Record<Locale, typeof pt> = { pt, en: enGB, es };
 const dateFormats: Record<Locale, string> = {
@@ -23,13 +23,8 @@ export function NextEventBanner({ bookHref = "/contact" }: Props) {
   const locale = useLocale();
   const t = useMessages(commonMessages).nextEvent;
 
-  // Fetched in the browser only: useQuery doesn't run during SSR without a prefetch.
-  const { data: event } = useQuery({
-    queryKey: ["next-event"],
-    queryFn: getNextEvent,
-    staleTime: 5 * 60 * 1000,
-    retry: false,
-  });
+  // Shared with the contact form; fetched once, in the browser only.
+  const { data: event } = useQuery({ ...siteConfigQuery, select: (config) => config.nextEvent });
 
   if (!event) return null;
 

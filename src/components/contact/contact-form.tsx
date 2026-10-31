@@ -1,5 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -33,6 +34,7 @@ import {
   swimLevels,
   type ContactResult,
 } from "@/lib/contact-api";
+import { siteConfigQuery } from "@/lib/site-config-api";
 
 // Same rules as the API's ContactInputValidator, so most mistakes are caught before sending.
 const namePattern = /^\p{L}[\p{L}\p{M} .'-]*$/u;
@@ -79,12 +81,21 @@ export function ContactForm() {
   const t = useMessages(contactMessages);
   const schema = useMemo(() => createSchema(t.errors), [t.errors]);
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: defaults });
+  const queryClient = useQueryClient();
   const [status, setStatus] = useState<
-    "idle" | "sent" | Exclude<ContactResult, { ok: true }>["reason"]
+    "idle" | "sent" | "emailNotSet" | Exclude<ContactResult, { ok: true }>["reason"]
   >("idle");
 
   async function onSubmit(values: FormValues) {
     setStatus("idle");
+
+    // Only send when the site has e-mail set up (api/config → emailSet); otherwise point to the other channels.
+    const config = await queryClient.fetchQuery(siteConfigQuery).catch(() => null);
+    if (!config?.emailSet) {
+      setStatus("emailNotSet");
+      return;
+    }
+
     const result = await sendContact({
       ...values,
       age: values.age ? Number(values.age) : undefined,
