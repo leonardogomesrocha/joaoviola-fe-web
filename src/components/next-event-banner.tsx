@@ -19,7 +19,7 @@ type Props = {
 };
 
 /** The next event's text. Renders nothing when there is no event. */
-export function NextEventBanner({ bookHref = "#contacto" }: Props) {
+export function NextEventBanner({ bookHref = "/contact" }: Props) {
   const locale = useLocale();
   const t = useMessages(commonMessages).nextEvent;
 

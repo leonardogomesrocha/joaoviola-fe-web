@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { locales, matchLocale } from "@/i18n/config";
 import { commonMessages } from "@/i18n/messages/common";
+import { contactMessages } from "@/i18n/messages/contact";
 import { homeMessages } from "@/i18n/messages/home";
 import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
 import { studioData } from "@/lib/studio-data";
@@ -23,6 +24,7 @@ describe("i18n", () => {
 
   it.each([
     ["common", commonMessages],
+    ["contact", contactMessages],
     ["home", homeMessages],
     ["private-lessons", privateLessonsMessages],
     ["studio data", studioData],

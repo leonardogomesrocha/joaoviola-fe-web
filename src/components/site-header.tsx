@@ -31,9 +31,9 @@ export function SiteHeader({ brand, overlay = false }: Props) {
           <a href="/#condicoes" className="hover:text-gold">
             {t.conditions}
           </a>
-          <a href="#contacto" className="hover:text-gold">
+          <Link to="/contact" className="hover:text-gold" activeProps={{ className: "text-gold" }}>
             {t.contact}
-          </a>
+          </Link>
         </div>
       </nav>
     </header>

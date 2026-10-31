@@ -2,15 +2,17 @@ import { ChevronRight, Lightbulb, MessageCircle, User, Video, type LucideIcon } 
 import { SectionLabel } from "@/components/section-label";
 import { useMessages } from "@/i18n";
 import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
+import feedback from "@/assets/private-lessons/feedback.jpg";
+import session from "@/assets/private-lessons/session.jpg";
+import tips from "@/assets/private-lessons/tips.jpg";
+import videoAnalysis from "@/assets/private-lessons/video-analysis.jpg";
 
 /**
- * Photos for the 2x2 grid, in the same order as the tile labels.
- * To use real photos: put them in src/assets/private-lessons/ and import them here, e.g.
- *   import session from "@/assets/private-lessons/session.jpg";
- *   const photos = [session, video, tips, feedback];
- * Tiles without a photo show a pool-blue placeholder with an icon.
+ * Photos for the 2x2 grid, in the same order as the tile labels
+ * (offer.tiles in src/i18n/messages/private-lessons.ts).
+ * A tile without a photo (undefined) shows a pool-blue placeholder with an icon.
  */
-const photos: (string | undefined)[] = [undefined, undefined, undefined, undefined];
+const photos: (string | undefined)[] = [session, videoAnalysis, tips, feedback];
 const fallbackIcons: LucideIcon[] = [User, Video, Lightbulb, MessageCircle];
 
 function QuoteMark() {

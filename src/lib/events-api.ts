@@ -1,6 +1,8 @@
 // Client for the SportApi events endpoint. The API identifies the client by the
 // browser's Origin header, so this must run in the browser, not during SSR.
 
+import { API_URL } from "./api";
+
 export type NextEvent = {
   id: number;
   name: string;
@@ -8,8 +10,6 @@ export type NextEvent = {
   countryCode: string;
   countryPrefix: string;
 };
-
-const API_URL = (import.meta.env.VITE_API_URL ?? "https://syrcgate.com").replace(/\/$/, "");
 
 /** Returns the next event, or null when there is none (404) or this site isn't allowed (403). */
 export async function getNextEvent(): Promise<NextEvent | null> {

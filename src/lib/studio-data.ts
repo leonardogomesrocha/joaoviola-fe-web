@@ -13,7 +13,13 @@ export type Plan = {
   period: string;
 };
 
-export type Contact = { phone: string; email: string; instagram: string };
+export type Contact = {
+  phone: string;
+  /** International number for wa.me links, digits only. */
+  whatsapp: string;
+  email: string;
+  instagram: string;
+};
 
 export type StudioData = {
   brand: string;
@@ -26,6 +32,7 @@ export type StudioData = {
 
 const contact: Contact = {
   phone: "916 493 947",
+  whatsapp: "351916493947",
   email: "geral.grupoviola@gmail.com",
   instagram: "joao_viola38",
 };
