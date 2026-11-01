@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CheckCircle2, Loader2 } from "lucide-react";
-import { useQueryClient } from "@tanstack/react-query";
-import { useMemo, useState } from "react";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMemo, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-import { useMessages } from "@/i18n";
+import { localeInfo, useLocale, useMessages } from "@/i18n";
 import { contactMessages } from "@/i18n/messages/contact";
 import {
   contactTopics,
@@ -35,6 +35,7 @@ import {
   type ContactResult,
 } from "@/lib/contact-api";
 import { siteConfigQuery } from "@/lib/site-config-api";
+import { Turnstile, type TurnstileHandle } from "./turnstile";
 
 // Same rules as the API's ContactInputValidator, so most mistakes are caught before sending.
 const namePattern = /^\p{L}[\p{L}\p{M} .'-]*$/u;
@@ -82,24 +83,38 @@ export function ContactForm() {
   const schema = useMemo(() => createSchema(t.errors), [t.errors]);
   const form = useForm<FormValues>({ resolver: zodResolver(schema), defaultValues: defaults });
   const queryClient = useQueryClient();
+  const locale = useLocale();
+  const { data: config } = useQuery(siteConfigQuery);
+  const captchaSiteKey = config?.captchaSiteKey ?? null;
+  const turnstile = useRef<TurnstileHandle>(null);
+  const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   const [status, setStatus] = useState<
-    "idle" | "sent" | "emailNotSet" | Exclude<ContactResult, { ok: true }>["reason"]
+    "idle" | "sent" | "emailNotSet" | "captcha" | Exclude<ContactResult, { ok: true }>["reason"]
   >("idle");
 
   async function onSubmit(values: FormValues) {
     setStatus("idle");
 
     // Only send when the site has e-mail set up (api/config → emailSet); otherwise point to the other channels.
-    const config = await queryClient.fetchQuery(siteConfigQuery).catch(() => null);
-    if (!config?.emailSet) {
+    const current = await queryClient.fetchQuery(siteConfigQuery).catch(() => null);
+    if (!current?.emailSet) {
       setStatus("emailNotSet");
+      return;
+    }
+
+    if (current.captchaSiteKey && !captchaToken) {
+      setStatus("captcha");
       return;
     }
 
     const result = await sendContact({
       ...values,
+      captchaToken: captchaToken ?? undefined,
       age: values.age ? Number(values.age) : undefined,
     });
+
+    // A token can only be verified once: get a new one for any retry.
+    turnstile.current?.reset();
 
     if (result.ok) {
       form.reset(defaults);
@@ -108,6 +123,10 @@ export function ContactForm() {
     }
 
     if (result.reason === "validation") {
+      if (result.fields.captchaToken) {
+        setStatus("captcha");
+        return;
+      }
       for (const [field, messages] of Object.entries(result.fields)) {
         if (field in defaults) form.setError(field as keyof FormValues, { message: messages[0] });
       }
@@ -346,6 +365,14 @@ export function ContactForm() {
         />
 
         <div className="flex flex-col items-center gap-4 sm:col-span-2">
+          {captchaSiteKey && (
+            <Turnstile
+              ref={turnstile}
+              siteKey={captchaSiteKey}
+              language={localeInfo[locale].intl.toLowerCase()}
+              onToken={setCaptchaToken}
+            />
+          )}
           {status !== "idle" && (
             <p role="alert" className="text-center text-sm font-medium text-destructive">
               {t.failed[status]}

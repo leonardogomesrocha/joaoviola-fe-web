@@ -36,6 +36,8 @@ export type ContactRequest = {
   consentAccepted: boolean;
   /** Hidden anti-spam field; real visitors leave it empty. */
   website?: string;
+  /** Cloudflare Turnstile token, when the site has CAPTCHA enabled. */
+  captchaToken?: string;
 };
 
 export type ContactResult =

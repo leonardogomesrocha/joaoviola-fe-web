@@ -80,6 +80,7 @@ export const contactMessages = defineMessages({
     success: "Mensagem enviada! Vou responder-te o mais rápido possível.",
     failed: {
       validation: "Revê os campos assinalados.",
+      captcha: "Confirma que não és um robô e tenta novamente.",
       emailNotSet:
         "De momento não é possível enviar mensagens por aqui. Fala connosco por WhatsApp, Instagram ou e-mail.",
       rateLimited: "Enviaste demasiadas mensagens. Tenta novamente daqui a um minuto.",
@@ -141,6 +142,7 @@ export const contactMessages = defineMessages({
     success: "Message sent! I'll get back to you as soon as possible.",
     failed: {
       validation: "Please check the highlighted fields.",
+      captcha: "Please confirm you're not a robot and try again.",
       emailNotSet:
         "We can't send messages from here right now. Please reach us on WhatsApp, Instagram or by e-mail.",
       rateLimited: "You've sent too many messages. Please try again in a minute.",
@@ -203,6 +205,7 @@ export const contactMessages = defineMessages({
     success: "¡Mensaje enviado! Te responderé lo antes posible.",
     failed: {
       validation: "Revisa los campos marcados.",
+      captcha: "Confirma que no eres un robot e inténtalo de nuevo.",
       emailNotSet:
         "Ahora mismo no es posible enviar mensajes desde aquí. Escríbenos por WhatsApp, Instagram o e-mail.",
       rateLimited: "Has enviado demasiados mensajes. Inténtalo de nuevo en un minuto.",

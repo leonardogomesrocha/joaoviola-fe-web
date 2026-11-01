@@ -16,10 +16,12 @@ export type SiteConfig = {
   nextEvent: NextEvent | null;
   /** False when the site has no e-mail settings, so the contact form can't send. */
   emailSet: boolean;
+  /** Cloudflare Turnstile site key for the contact form; null when CAPTCHA is off. */
+  captchaSiteKey: string | null;
 };
 
 /** A site that isn't registered in ClientCors gets no event and can't send e-mails. */
-const notAllowed: SiteConfig = { nextEvent: null, emailSet: false };
+const notAllowed: SiteConfig = { nextEvent: null, emailSet: false, captchaSiteKey: null };
 
 export async function getSiteConfig(): Promise<SiteConfig> {
   const response = await fetch(`${API_URL}/api/config`, {
