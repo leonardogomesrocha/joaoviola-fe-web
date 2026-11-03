@@ -12,9 +12,9 @@ picker in the top bar (`src/components/language-switcher.tsx`) changes it.
    import { defineMessages } from "@/i18n";
 
    export const campsMessages = defineMessages({
-     pt: { meta: { title: "Campos de Treino — Grupo Viola" }, title: "Campos de Treino" },
-     en: { meta: { title: "Training Camps — Grupo Viola" }, title: "Training Camps" },
-     es: { meta: { title: "Campus de Entrenamiento — Grupo Viola" }, title: "Campus de Entrenamiento" },
+     pt: { meta: { title: "Campos de Treino — Coach Viola" }, title: "Campos de Treino" },
+     en: { meta: { title: "Training Camps — Coach Viola" }, title: "Training Camps" },
+     es: { meta: { title: "Campus de Entrenamiento — Coach Viola" }, title: "Campus de Entrenamiento" },
    });
    ```
 

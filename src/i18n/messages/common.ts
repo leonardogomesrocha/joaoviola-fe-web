@@ -6,7 +6,6 @@ export const commonMessages = defineMessages({
     nav: {
       plans: "Planos",
       privateLessons: "Aulas Particulares",
-      conditions: "Condições",
       contact: "Contacto",
       menu: "Menu",
       openMenu: "Abrir menu",
@@ -25,7 +24,6 @@ export const commonMessages = defineMessages({
     nav: {
       plans: "Plans",
       privateLessons: "Private Lessons",
-      conditions: "Conditions",
       contact: "Contact",
       menu: "Menu",
       openMenu: "Open menu",
@@ -39,7 +37,6 @@ export const commonMessages = defineMessages({
     nav: {
       plans: "Planes",
       privateLessons: "Clases Particulares",
-      conditions: "Condiciones",
       contact: "Contacto",
       menu: "Menú",
       openMenu: "Abrir menú",

@@ -3,7 +3,7 @@ import { defineMessages } from "@/i18n";
 export const homeMessages = defineMessages({
   pt: {
     meta: {
-      title: "Grupo Viola — Planos de Treino Online",
+      title: "Coach Viola — Planos de Treino Online",
       description:
         "Planos de treino de natação, triatlo, Ironman e musculação online com o treinador João Viola.",
       ogDescription: "Natação, triatlo, Ironman e musculação com acompanhamento personalizado.",
@@ -18,7 +18,7 @@ export const homeMessages = defineMessages({
   },
   en: {
     meta: {
-      title: "Grupo Viola — Online Training Plans",
+      title: "Coach Viola — Online Training Plans",
       description:
         "Online swimming, triathlon, Ironman and strength training plans with coach João Viola.",
       ogDescription: "Swimming, triathlon, Ironman and strength training with personal coaching.",
@@ -33,7 +33,7 @@ export const homeMessages = defineMessages({
   },
   es: {
     meta: {
-      title: "Grupo Viola — Planes de Entrenamiento Online",
+      title: "Coach Viola — Planes de Entrenamiento Online",
       description:
         "Planes de entrenamiento online de natación, triatlón, Ironman y musculación con el entrenador João Viola.",
       ogDescription: "Natación, triatlón, Ironman y musculación con seguimiento personalizado.",

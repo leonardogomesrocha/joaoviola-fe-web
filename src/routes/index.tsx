@@ -1,12 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
-import { Timer, Dumbbell, Phone, Mail, Instagram, ArrowRight } from "lucide-react";
+import {
+  Timer,
+  Dumbbell,
+  Phone,
+  Mail,
+  Instagram,
+  ArrowRight,
+  Waves,
+  Users,
+  Droplets,
+} from "lucide-react";
 import hero from "@/assets/hero.jpg";
-import { type Plan } from "@/lib/studio-data";
+import { type Plan, type ServiceGroup } from "@/lib/studio-data";
 import { studioQuery } from "@/lib/studio-query";
 import { SiteHeader } from "@/components/site-header";
 import { useLocale, useMessages } from "@/i18n";
-import { commonMessages } from "@/i18n/messages/common";
 import { homeMessages } from "@/i18n/messages/home";
 
 export const Route = createFileRoute("/")({
@@ -29,6 +38,7 @@ export const Route = createFileRoute("/")({
 });
 
 const icons = { stopwatch: Timer, dumbbell: Dumbbell };
+const serviceIcons = { openWater: Waves, group: Users, pool: Droplets };
 
 function SectionTitle({ children }: { children: string }) {
   return (
@@ -69,10 +79,62 @@ function PlanCard({ plan }: { plan: Plan }) {
   );
 }
 
+function ServiceCard({ group }: { group: ServiceGroup }) {
+  const Icon = serviceIcons[group.icon];
+  return (
+    <article className="rounded-2xl bg-card p-6 md:p-8">
+      <div className="flex flex-wrap items-start justify-between gap-4">
+        <div className="flex items-center gap-4">
+          <div className="flex size-14 shrink-0 items-center justify-center rounded-full bg-gold text-gold-foreground">
+            <Icon className="size-7" />
+          </div>
+          <div>
+            <h3 className="font-display text-xl font-bold uppercase leading-tight md:text-2xl">
+              {group.title}
+            </h3>
+            <p className="font-display text-xl font-bold uppercase leading-tight md:text-2xl">
+              {group.subtitle}
+            </p>
+          </div>
+        </div>
+        {group.duo && (
+          <div className="flex flex-col items-center gap-1 text-center">
+            <span className="rounded-md bg-gold px-3 py-1 font-display text-sm font-bold uppercase tracking-wider text-gold-foreground">
+              {group.duo.badge}
+            </span>
+            <span className="font-display text-2xl font-bold text-gold">{group.duo.discount}</span>
+            <span className="max-w-[9rem] text-xs font-semibold uppercase leading-tight text-muted-foreground">
+              {group.duo.note}
+            </span>
+          </div>
+        )}
+      </div>
+
+      <ul className="mt-6 overflow-hidden rounded-xl border">
+        {group.rows.map((r) => (
+          <li
+            key={r.label}
+            className="grid grid-cols-[minmax(0,1fr)_auto] items-center border-b last:border-b-0 sm:grid-cols-[minmax(0,1fr)_7rem_9rem]"
+          >
+            <span className="bg-ink px-5 py-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-foreground">
+              {r.label}
+            </span>
+            <span className="px-5 py-4 text-right font-display text-xl font-bold sm:text-center">
+              {r.price} €
+            </span>
+            <span className="hidden px-5 py-4 text-sm text-muted-foreground sm:block">
+              {r.perSession ? `(${r.perSession})` : ""}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </article>
+  );
+}
+
 function Index() {
   const { data } = useSuspenseQuery(studioQuery(useLocale()));
   const t = useMessages(homeMessages);
-  const common = useMessages(commonMessages);
   const { contact } = data;
   return (
     <div className="min-h-screen">
@@ -116,18 +178,13 @@ function Index() {
           </div>
         </section>
 
-        <section id="condicoes" className="scroll-mt-10 pb-20">
-          <SectionTitle>{common.conditionsTitle}</SectionTitle>
-          <ul className="grid gap-4 md:grid-cols-2">
-            {data.conditions.map((c, i) => (
-              <li key={i} className="flex gap-4 rounded-xl border p-5">
-                <span className="font-display text-2xl font-bold text-gold">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span className="text-muted-foreground">{c}</span>
-              </li>
+        <section id="aulas-servicos" className="scroll-mt-10 pb-20">
+          <SectionTitle>{data.servicesTitle}</SectionTitle>
+          <div className="space-y-6">
+            {data.services.map((g) => (
+              <ServiceCard key={g.id} group={g} />
             ))}
-          </ul>
+          </div>
         </section>
       </main>
 

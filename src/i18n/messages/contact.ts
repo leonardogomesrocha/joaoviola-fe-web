@@ -28,7 +28,7 @@ const times = (
 export const contactMessages = defineMessages({
   pt: {
     meta: {
-      title: "Contacto — Grupo Viola",
+      title: "Contacto — Coach Viola",
       description:
         "Fala com o treinador João Viola por WhatsApp, Instagram ou pelo formulário de contacto.",
     },
@@ -91,7 +91,7 @@ export const contactMessages = defineMessages({
   },
   en: {
     meta: {
-      title: "Contact — Grupo Viola",
+      title: "Contact — Coach Viola",
       description: "Talk to coach João Viola on WhatsApp, Instagram or through the contact form.",
     },
     label: "Contact",
@@ -153,7 +153,7 @@ export const contactMessages = defineMessages({
   },
   es: {
     meta: {
-      title: "Contacto — Grupo Viola",
+      title: "Contacto — Coach Viola",
       description:
         "Habla con el entrenador João Viola por WhatsApp, Instagram o con el formulario de contacto.",
     },

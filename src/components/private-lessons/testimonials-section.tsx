@@ -21,7 +21,11 @@ export function TestimonialsSection() {
       <SectionLabel number={2}>{t.label}</SectionLabel>
       <h2 className="mt-6 font-display text-3xl font-bold uppercase md:text-4xl">{t.title}</h2>
 
-      <ul className="mt-10 grid gap-6 md:grid-cols-3">
+      <ul
+        className={`mt-10 grid gap-6 ${
+          t.items.length === 1 ? "max-w-2xl" : t.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+        }`}
+      >
         {t.items.map((item, i) => (
           <li key={i} className="relative flex flex-col rounded-2xl bg-card p-7">
             {item.placeholder && (
@@ -36,9 +40,18 @@ export function TestimonialsSection() {
               {item.text}
             </blockquote>
             <div className="mt-6 flex items-center gap-3 border-t border-border pt-5">
-              <span className="flex size-11 items-center justify-center rounded-full bg-ink font-display text-sm font-semibold text-gold">
-                {initials(item.name)}
-              </span>
+              {item.image ? (
+                <img
+                  src={item.image}
+                  alt={item.name}
+                  loading="lazy"
+                  className="size-11 rounded-full object-cover"
+                />
+              ) : (
+                <span className="flex size-11 items-center justify-center rounded-full bg-ink font-display text-sm font-semibold text-gold">
+                  {initials(item.name)}
+                </span>
+              )}
               <div>
                 <div className="font-semibold">{item.name}</div>
                 {item.role && <div className="text-sm text-muted-foreground">{item.role}</div>}

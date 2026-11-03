@@ -5,6 +5,8 @@ export type Testimonial = {
   /** e.g. "Triatleta" — optional context shown under the name. */
   role: string;
   text: string;
+  /** Optional photo (path under /public) shown instead of the initials avatar. */
+  image?: string;
   /** Placeholder entries show an "Exemplo" badge so they're never mistaken for real reviews. */
   placeholder?: boolean;
 };
@@ -12,7 +14,7 @@ export type Testimonial = {
 export const privateLessonsMessages = defineMessages({
   pt: {
     meta: {
-      title: "Aulas Particulares — Grupo Viola",
+      title: "Aulas Particulares — Coach Viola",
       description:
         "Aulas particulares de natação em piscina e águas abertas com o treinador João Viola.",
     },
@@ -49,22 +51,10 @@ export const privateLessonsMessages = defineMessages({
       exampleBadge: "Exemplo",
       items: [
         {
-          name: "Nome do aluno",
+          name: "Leonardo Rocha",
           role: "Triatleta",
-          text: "Substitui este texto pelo testemunho real de um aluno sobre as aulas particulares.",
-          placeholder: true,
-        },
-        {
-          name: "Nome do aluno",
-          role: "Nadador de águas abertas",
-          text: "Substitui este texto pelo testemunho real de um aluno sobre as aulas particulares.",
-          placeholder: true,
-        },
-        {
-          name: "Nome do aluno",
-          role: "Principiante",
-          text: "Substitui este texto pelo testemunho real de um aluno sobre as aulas particulares.",
-          placeholder: true,
+          text: "Um enorme obrigado ao meu coach por me ajudar a perder o medo da água! Com muita paciência e dedicação, através de muitos exercícios, ajudou-me a trabalhar a mente, ganhar confiança e conseguir nadar até no mar para o meu primeiro Ironman.",
+          image: "/testimonials/leonardo-rocha.jpg",
         },
       ] as Testimonial[],
     },
@@ -72,7 +62,7 @@ export const privateLessonsMessages = defineMessages({
   },
   en: {
     meta: {
-      title: "Private Lessons — Grupo Viola",
+      title: "Private Lessons — Coach Viola",
       description: "Private swimming lessons in the pool and open water with coach João Viola.",
     },
     hero: {
@@ -105,22 +95,10 @@ export const privateLessonsMessages = defineMessages({
       exampleBadge: "Example",
       items: [
         {
-          name: "Student name",
+          name: "Leonardo Rocha",
           role: "Triathlete",
-          text: "Replace this text with a real student's testimonial about the private lessons.",
-          placeholder: true,
-        },
-        {
-          name: "Student name",
-          role: "Open water swimmer",
-          text: "Replace this text with a real student's testimonial about the private lessons.",
-          placeholder: true,
-        },
-        {
-          name: "Student name",
-          role: "Beginner",
-          text: "Replace this text with a real student's testimonial about the private lessons.",
-          placeholder: true,
+          text: "A huge thank you to my coach for helping me overcome my fear of water! With a lot of patience and dedication, through plenty of exercises, he helped me work on my mind, build confidence and even swim in the sea for my first Ironman.",
+          image: "/testimonials/leonardo-rocha.jpg",
         },
       ] as Testimonial[],
     },
@@ -128,7 +106,7 @@ export const privateLessonsMessages = defineMessages({
   },
   es: {
     meta: {
-      title: "Clases Particulares — Grupo Viola",
+      title: "Clases Particulares — Coach Viola",
       description:
         "Clases particulares de natación en piscina y aguas abiertas con el entrenador João Viola.",
     },
@@ -170,22 +148,10 @@ export const privateLessonsMessages = defineMessages({
       exampleBadge: "Ejemplo",
       items: [
         {
-          name: "Nombre del alumno",
+          name: "Leonardo Rocha",
           role: "Triatleta",
-          text: "Sustituye este texto por el testimonio real de un alumno sobre las clases particulares.",
-          placeholder: true,
-        },
-        {
-          name: "Nombre del alumno",
-          role: "Nadador de aguas abiertas",
-          text: "Sustituye este texto por el testimonio real de un alumno sobre las clases particulares.",
-          placeholder: true,
-        },
-        {
-          name: "Nombre del alumno",
-          role: "Principiante",
-          text: "Sustituye este texto por el testimonio real de un alumno sobre las clases particulares.",
-          placeholder: true,
+          text: "¡Un enorme gracias a mi coach por ayudarme a perder el miedo al agua! Con mucha paciencia y dedicación, a través de muchos ejercicios, me ayudó a trabajar la mente, ganar confianza y conseguir nadar incluso en el mar para mi primer Ironman.",
+          image: "/testimonials/leonardo-rocha.jpg",
         },
       ] as Testimonial[],
     },

@@ -23,7 +23,6 @@ type NavLabels = (typeof commonMessages)["pt"]["nav"];
 const items: { label: keyof NavLabels; to?: "/private-lessons" | "/contact"; href?: string }[] = [
   { label: "plans", href: "/#planos" },
   { label: "privateLessons", to: "/private-lessons" },
-  { label: "conditions", href: "/#condicoes" },
   { label: "contact", to: "/contact" },
 ];
 
