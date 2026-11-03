@@ -8,6 +8,8 @@ export const commonMessages = defineMessages({
       privateLessons: "Aulas Particulares",
       conditions: "Condições",
       contact: "Contacto",
+      menu: "Menu",
+      openMenu: "Abrir menu",
     },
     nextEvent: {
       label: "Próximo evento",
@@ -16,6 +18,7 @@ export const commonMessages = defineMessages({
       region: "Próximo evento",
     },
     language: { choose: "Escolher idioma" },
+    whatsapp: { label: "Falar connosco no WhatsApp" },
     conditionsTitle: "Condições",
   },
   en: {
@@ -24,9 +27,12 @@ export const commonMessages = defineMessages({
       privateLessons: "Private Lessons",
       conditions: "Conditions",
       contact: "Contact",
+      menu: "Menu",
+      openMenu: "Open menu",
     },
     nextEvent: { label: "Next event", from: "From", book: "Book now", region: "Next event" },
     language: { choose: "Choose language" },
+    whatsapp: { label: "Chat with us on WhatsApp" },
     conditionsTitle: "Conditions",
   },
   es: {
@@ -35,6 +41,8 @@ export const commonMessages = defineMessages({
       privateLessons: "Clases Particulares",
       conditions: "Condiciones",
       contact: "Contacto",
+      menu: "Menú",
+      openMenu: "Abrir menú",
     },
     nextEvent: {
       label: "Próximo evento",
@@ -43,6 +51,7 @@ export const commonMessages = defineMessages({
       region: "Próximo evento",
     },
     language: { choose: "Elegir idioma" },
+    whatsapp: { label: "Habla con nosotros por WhatsApp" },
     conditionsTitle: "Condiciones",
   },
 });
