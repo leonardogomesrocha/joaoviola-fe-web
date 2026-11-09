@@ -17,6 +17,18 @@ export function getSiteUrl(fallbackOrigin?: string): string | undefined {
   return raw?.replace(/\/$/, "");
 }
 
+/** Public origin of a request, honouring the proxy's X-Forwarded-* headers (so https stays https). */
+export function requestOrigin(request: Request): string {
+  const url = new URL(request.url);
+  const proto =
+    request.headers.get("x-forwarded-proto")?.split(",")[0].trim() || url.protocol.slice(0, -1);
+  const host =
+    request.headers.get("x-forwarded-host")?.split(",")[0].trim() ||
+    request.headers.get("host") ||
+    url.host;
+  return `${proto}://${host}`;
+}
+
 const ogLocale: Record<Locale, string> = { pt: "pt_PT", en: "en_GB", es: "es_ES" };
 
 /** Every language version of a page, plus x-default (the default language), as absolute URLs. */

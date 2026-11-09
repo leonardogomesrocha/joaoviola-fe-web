@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { localePath, locales } from "@/i18n/config";
-import { alternates, getSiteUrl, sitePages } from "@/lib/seo";
+import { alternates, getSiteUrl, requestOrigin, sitePages } from "@/lib/seo";
 
 /** One <url> per page and language, each listing all its translations (hreflang). */
 export function buildSitemap(origin: string, lastmod: string) {
@@ -20,7 +20,7 @@ export const Route = createFileRoute("/sitemap.xml")({
   server: {
     handlers: {
       GET: ({ request }: { request: Request }) => {
-        const origin = getSiteUrl(new URL(request.url).origin)!;
+        const origin = getSiteUrl(requestOrigin(request))!;
         const xml = buildSitemap(origin, new Date().toISOString().slice(0, 10));
         return new Response(xml, {
           headers: {
