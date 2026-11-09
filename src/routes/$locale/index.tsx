@@ -106,7 +106,7 @@ function ServiceCard({ group }: { group: ServiceGroup }) {
             <span className="rounded-md bg-gold px-3 py-1 font-display text-sm font-bold uppercase tracking-wider text-gold-foreground">
               {group.duo.badge}
             </span>
-            <span className="font-display text-2xl font-bold text-gold">{group.duo.discount}</span>
+            <span className="font-display text-2xl font-bold text-gold-strong">{group.duo.discount}</span>
             <span className="max-w-[9rem] text-xs font-semibold uppercase leading-tight text-muted-foreground">
               {group.duo.note}
             </span>
