@@ -87,7 +87,7 @@ export const legalMessages = defineMessages({
         {
           name: "Cloudflare Turnstile",
           purpose:
-            "Segurança do formulário de contacto (anti-spam). Pode definir cookies próprios.",
+            "Segurança do formulário de contacto (anti-spam). Só é carregado quando começas a preencher o formulário e pode definir cookies próprios, incluindo de medição, do próprio Cloudflare.",
           duration: "Sessão",
         },
       ],
@@ -171,7 +171,8 @@ export const legalMessages = defineMessages({
         { name: "cookie_consent", purpose: "Remembers your cookie choice.", duration: "6 months" },
         {
           name: "Cloudflare Turnstile",
-          purpose: "Contact form security (anti-spam). May set its own cookies.",
+          purpose:
+            "Contact form security (anti-spam). Only loaded when you start filling in the form; it may set its own cookies, including measurement cookies, from Cloudflare itself.",
           duration: "Session",
         },
       ],
@@ -262,7 +263,7 @@ export const legalMessages = defineMessages({
         {
           name: "Cloudflare Turnstile",
           purpose:
-            "Seguridad del formulario de contacto (antispam). Puede definir cookies propias.",
+            "Seguridad del formulario de contacto (antispam). Solo se carga cuando empiezas a rellenar el formulario y puede definir cookies propias, incluidas de medición, del propio Cloudflare.",
           duration: "Sesión",
         },
       ],

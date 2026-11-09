@@ -64,23 +64,34 @@ export function Turnstile({ siteKey, onToken, language, ref }: Props) {
 
   useEffect(() => {
     let cancelled = false;
+    const form = container.current?.closest("form") ?? document;
+    const startEvents = ["focusin", "pointerdown", "keydown"] as const;
 
-    loadTurnstile()
-      .then((turnstile) => {
-        if (cancelled || !container.current) return;
-        widgetId.current = turnstile.render(container.current, {
-          sitekey: siteKey,
-          language,
-          theme: "light",
-          callback: (token: string) => onTokenRef.current(token),
-          "expired-callback": () => onTokenRef.current(null),
-          "error-callback": () => onTokenRef.current(null),
-        });
-      })
-      .catch(() => onTokenRef.current(null));
+    const stopListening = () => startEvents.forEach((e) => form.removeEventListener(e, start));
+    function start() {
+      stopListening();
+      loadTurnstile()
+        .then((turnstile) => {
+          if (cancelled || !container.current) return;
+          widgetId.current = turnstile.render(container.current, {
+            sitekey: siteKey,
+            language,
+            theme: "light",
+            callback: (token: string) => onTokenRef.current(token),
+            "expired-callback": () => onTokenRef.current(null),
+            "error-callback": () => onTokenRef.current(null),
+          });
+        })
+        .catch(() => onTokenRef.current(null));
+    }
+
+    // Cloudflare's script (and the cookies it sets) loads only when the visitor starts using the
+    // form, not when the page opens. A visitor has to fill the form in before sending anyway.
+    startEvents.forEach((e) => form.addEventListener(e, start, { once: true }));
 
     return () => {
       cancelled = true;
+      stopListening();
       if (widgetId.current) window.turnstile?.remove(widgetId.current);
       widgetId.current = undefined;
     };

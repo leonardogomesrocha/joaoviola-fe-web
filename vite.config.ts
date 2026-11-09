@@ -16,4 +16,6 @@ export default defineConfig({
   nitro: {
     preset: "node-server",
   },
+  // Publish source maps so production errors can be traced to the original code.
+  vite: { build: { sourcemap: true } },
 });

@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { Mail, Phone } from "lucide-react";
 import { OfferSection } from "@/components/private-lessons/offer-section";
@@ -38,7 +38,8 @@ function SectionTitle({ children }: { children: string }) {
 }
 
 function PrivateLessons() {
-  const { data } = useSuspenseQuery(studioQuery(useLocale()));
+  const locale = useLocale();
+  const { data } = useSuspenseQuery(studioQuery(locale));
   const t = useMessages(privateLessonsMessages);
   const common = useMessages(commonMessages);
   const { contact } = data;
@@ -80,10 +81,16 @@ function PrivateLessons() {
 
       <footer id="contacto" className="bg-ink text-ink-foreground">
         <div className="container mx-auto grid max-w-5xl gap-8 px-6 py-16 md:grid-cols-2">
-          <div>
-            <h2 className="text-3xl font-bold text-gold">{t.contact.title}</h2>
+          <Link
+            to="/$locale/contact"
+            params={{ locale }}
+            className="group block rounded-xl transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold"
+          >
+            <h2 className="text-3xl font-bold text-gold group-hover:underline">
+              {t.contact.title}
+            </h2>
             <p className="mt-3 opacity-75">{t.contact.text}</p>
-          </div>
+          </Link>
           <ul className="space-y-4 text-lg">
             <li>
               <a
