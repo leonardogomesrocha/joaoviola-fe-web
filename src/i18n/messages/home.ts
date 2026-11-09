@@ -3,10 +3,11 @@ import { defineMessages } from "@/i18n";
 export const homeMessages = defineMessages({
   pt: {
     meta: {
-      title: "Coach Viola — Planos de Treino Online",
+      title: "Coach Viola — Treinador Olímpico de Natação e Triatlo Online",
       description:
-        "Planos de treino de natação, triatlo, Ironman e musculação online com o treinador João Viola.",
-      ogDescription: "Natação, triatlo, Ironman e musculação com acompanhamento personalizado.",
+        "Treinador olímpico João Viola: aprende a nadar em águas abertas e melhora o teu desempenho em travessias e triatlo. Planos online de natação, Ironman e musculação.",
+      ogDescription:
+        "Treinador olímpico: águas abertas, travessias, triatlo, Ironman e musculação com acompanhamento personalizado.",
     },
     hero: {
       eyebrow: "Natação · Triatlo · Ironman",
@@ -18,10 +19,11 @@ export const homeMessages = defineMessages({
   },
   en: {
     meta: {
-      title: "Coach Viola — Online Training Plans",
+      title: "Coach Viola — Olympic Swim & Triathlon Coach Online",
       description:
-        "Online swimming, triathlon, Ironman and strength training plans with coach João Viola.",
-      ogDescription: "Swimming, triathlon, Ironman and strength training with personal coaching.",
+        "Olympic coach João Viola teaches you to swim in open water and improves your performance in crossings and triathlon races. Online swimming, Ironman and strength plans.",
+      ogDescription:
+        "Olympic coach: open water, crossings, triathlon, Ironman and strength training with personal coaching.",
     },
     hero: {
       eyebrow: "Swimming · Triathlon · Ironman",
@@ -33,10 +35,11 @@ export const homeMessages = defineMessages({
   },
   es: {
     meta: {
-      title: "Coach Viola — Planes de Entrenamiento Online",
+      title: "Coach Viola — Entrenador Olímpico de Natación y Triatlón Online",
       description:
-        "Planes de entrenamiento online de natación, triatlón, Ironman y musculación con el entrenador João Viola.",
-      ogDescription: "Natación, triatlón, Ironman y musculación con seguimiento personalizado.",
+        "El entrenador olímpico João Viola te enseña a nadar en aguas abiertas y mejora tu rendimiento en travesías y triatlón. Planes online de natación, Ironman y musculación.",
+      ogDescription:
+        "Entrenador olímpico: aguas abiertas, travesías, triatlón, Ironman y musculación con seguimiento personalizado.",
     },
     hero: {
       eyebrow: "Natación · Triatlón · Ironman",
