@@ -7,23 +7,22 @@ import { SiteHeader } from "@/components/site-header";
 import { useLocale, useMessages } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
 import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
+import { buildSeo } from "@/lib/seo";
 import { studioQuery } from "@/lib/studio-query";
 
-export const Route = createFileRoute("/private-lessons")({
+export const Route = createFileRoute("/$locale/private-lessons")({
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(studioQuery(context.locale));
     return { locale: context.locale };
   },
   head: ({ loaderData }) => {
     const t = privateLessonsMessages[loaderData?.locale ?? "pt"].meta;
-    return {
-      meta: [
-        { title: t.title },
-        { name: "description", content: t.description },
-        { property: "og:title", content: t.title },
-        { property: "og:description", content: t.description },
-      ],
-    };
+    return buildSeo({
+      title: t.title,
+      description: t.description,
+      path: "/private-lessons",
+      locale: loaderData?.locale ?? "pt",
+    });
   },
   component: PrivateLessons,
 });

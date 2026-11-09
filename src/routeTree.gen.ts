@@ -10,53 +10,110 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as PrivateLessonsRouteImport } from './routes/private-lessons'
+import { Route as LocaleRouteRouteImport } from './routes/$locale/route'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as LocaleIndexRouteImport } from './routes/$locale/index'
+import { Route as LocaleContactRouteImport } from './routes/$locale/contact'
+import { Route as LocalePrivateLessonsRouteImport } from './routes/$locale/private-lessons'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
+const LocaleRouteRoute = LocaleRouteRouteImport.update({
+  id: '/$locale',
+  path: '/$locale',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrivateLessonsRoute = PrivateLessonsRouteImport.update({
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LocaleIndexRoute = LocaleIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => LocaleRouteRoute,
+} as any)
+const LocaleContactRoute = LocaleContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => LocaleRouteRoute,
+} as any)
+const LocalePrivateLessonsRoute = LocalePrivateLessonsRouteImport.update({
   id: '/private-lessons',
   path: '/private-lessons',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => LocaleRouteRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/private-lessons': typeof PrivateLessonsRoute
+  '/$locale': typeof LocaleRouteRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/private-lessons': typeof PrivateLessonsRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
+  '/$locale': typeof LocaleIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/contact': typeof ContactRoute
-  '/private-lessons': typeof PrivateLessonsRoute
+  '/$locale': typeof LocaleRouteRouteWithChildren
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
+  '/$locale/': typeof LocaleIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/private-lessons'
+  fullPaths:
+    | '/'
+    | '/$locale'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$locale/contact'
+    | '/$locale/private-lessons'
+    | '/$locale/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/private-lessons'
-  id: '__root__' | '/' | '/contact' | '/private-lessons'
+  to:
+    | '/'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$locale/contact'
+    | '/$locale/private-lessons'
+    | '/$locale'
+  id:
+    | '__root__'
+    | '/'
+    | '/$locale'
+    | '/robots.txt'
+    | '/sitemap.xml'
+    | '/$locale/contact'
+    | '/$locale/private-lessons'
+    | '/$locale/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  ContactRoute: typeof ContactRoute
-  PrivateLessonsRoute: typeof PrivateLessonsRoute
+  LocaleRouteRoute: typeof LocaleRouteRouteWithChildren
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,27 +125,72 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
+    '/$locale': {
+      id: '/$locale'
+      path: '/$locale'
+      fullPath: '/$locale'
+      preLoaderRoute: typeof LocaleRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/private-lessons': {
-      id: '/private-lessons'
-      path: '/private-lessons'
-      fullPath: '/private-lessons'
-      preLoaderRoute: typeof PrivateLessonsRouteImport
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/$locale/': {
+      id: '/$locale/'
+      path: '/'
+      fullPath: '/$locale/'
+      preLoaderRoute: typeof LocaleIndexRouteImport
+      parentRoute: typeof LocaleRouteRoute
+    }
+    '/$locale/contact': {
+      id: '/$locale/contact'
+      path: '/contact'
+      fullPath: '/$locale/contact'
+      preLoaderRoute: typeof LocaleContactRouteImport
+      parentRoute: typeof LocaleRouteRoute
+    }
+    '/$locale/private-lessons': {
+      id: '/$locale/private-lessons'
+      path: '/private-lessons'
+      fullPath: '/$locale/private-lessons'
+      preLoaderRoute: typeof LocalePrivateLessonsRouteImport
+      parentRoute: typeof LocaleRouteRoute
     }
   }
 }
 
+interface LocaleRouteRouteChildren {
+  LocaleContactRoute: typeof LocaleContactRoute
+  LocalePrivateLessonsRoute: typeof LocalePrivateLessonsRoute
+  LocaleIndexRoute: typeof LocaleIndexRoute
+}
+
+const LocaleRouteRouteChildren: LocaleRouteRouteChildren = {
+  LocaleContactRoute: LocaleContactRoute,
+  LocalePrivateLessonsRoute: LocalePrivateLessonsRoute,
+  LocaleIndexRoute: LocaleIndexRoute,
+}
+
+const LocaleRouteRouteWithChildren = LocaleRouteRoute._addFileChildren(
+  LocaleRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  ContactRoute: ContactRoute,
-  PrivateLessonsRoute: PrivateLessonsRoute,
+  LocaleRouteRoute: LocaleRouteRouteWithChildren,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

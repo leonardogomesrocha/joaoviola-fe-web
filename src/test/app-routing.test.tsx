@@ -14,11 +14,25 @@ describe("App routing", () => {
 
     expect(matches.at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  it.each(["/pt", "/en", "/es"])("matches the home page for %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes(path).at(-1)?.routeId).toBe("/$locale/");
+  });
 });
 
 describe("Private lessons route", () => {
   it("matches a page for /private-lessons", () => {
     const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
-    expect(router.matchRoutes("/private-lessons").at(-1)?.routeId).toBe("/private-lessons");
+    expect(router.matchRoutes("/en/private-lessons").at(-1)?.routeId).toBe(
+      "/$locale/private-lessons",
+    );
+  });
+});
+
+describe("Contact route", () => {
+  it("matches a page for /es/contact", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/es/contact").at(-1)?.routeId).toBe("/$locale/contact");
   });
 });

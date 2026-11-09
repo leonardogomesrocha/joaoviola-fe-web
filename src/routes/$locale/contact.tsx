@@ -8,23 +8,22 @@ import { ContactForm } from "@/components/contact/contact-form";
 import { SiteHeader } from "@/components/site-header";
 import { useLocale, useMessages } from "@/i18n";
 import { contactMessages } from "@/i18n/messages/contact";
+import { buildSeo } from "@/lib/seo";
 import { studioQuery } from "@/lib/studio-query";
 
-export const Route = createFileRoute("/contact")({
+export const Route = createFileRoute("/$locale/contact")({
   loader: async ({ context }) => {
     await context.queryClient.ensureQueryData(studioQuery(context.locale));
     return { locale: context.locale };
   },
   head: ({ loaderData }) => {
     const t = contactMessages[loaderData?.locale ?? "pt"].meta;
-    return {
-      meta: [
-        { title: t.title },
-        { name: "description", content: t.description },
-        { property: "og:title", content: t.title },
-        { property: "og:description", content: t.description },
-      ],
-    };
+    return buildSeo({
+      title: t.title,
+      description: t.description,
+      path: "/contact",
+      locale: loaderData?.locale ?? "pt",
+    });
   },
   component: ContactPage,
 });

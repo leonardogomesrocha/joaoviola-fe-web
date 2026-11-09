@@ -14,6 +14,7 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { TopBar } from "@/components/top-bar";
 import { WhatsAppButton } from "@/components/whatsapp-button";
+import { useLocale } from "@/i18n";
 import { getLocale } from "@/i18n/locale";
 
 function NotFoundComponent() {
@@ -106,7 +107,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const { locale } = Route.useRouteContext();
+  const locale = useLocale();
   return (
     <html lang={locale}>
       <head>

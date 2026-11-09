@@ -1,8 +1,12 @@
 # Languages (PT · EN · ES)
 
-The visitor's language is stored in the `lang` cookie (first visit: the browser's
-language, otherwise Portuguese). Pages render on the server in that language, and the
-picker in the top bar (`src/components/language-switcher.tsx`) changes it.
+Each language has its own URL prefix (`/pt`, `/en/contact`, `/es/private-lessons`), so every
+translation can be indexed by search engines. Pages live in `src/routes/$locale/`.
+`/` (and the old unprefixed `/contact`) redirect to the visitor's language: the `lang` cookie,
+otherwise the browser's language, otherwise Portuguese. The picker in the top bar
+(`src/components/language-switcher.tsx`) opens the same page under the other language's URL.
+Link with `<Link to="/$locale/contact" params={{ locale }} />` (get `locale` from `useLocale()`).
+The sitemap and `hreflang` links are generated from `sitePages` in `src/lib/seo.ts`.
 
 ## Adding a page or module
 

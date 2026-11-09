@@ -8,7 +8,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { useMessages } from "@/i18n";
+import { useLocale, useMessages } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
 
 type Props = {
@@ -20,10 +20,14 @@ type Props = {
 type NavLabels = (typeof commonMessages)["pt"]["nav"];
 
 /** Menu entries, shared by the desktop bar and the mobile panel. Sections of the home page use anchors. */
-const items: { label: keyof NavLabels; to?: "/private-lessons" | "/contact"; href?: string }[] = [
-  { label: "plans", href: "/#planos" },
-  { label: "privateLessons", to: "/private-lessons" },
-  { label: "contact", to: "/contact" },
+const items: {
+  label: keyof NavLabels;
+  to: "/$locale" | "/$locale/private-lessons" | "/$locale/contact";
+  hash?: string;
+}[] = [
+  { label: "plans", to: "/$locale", hash: "planos" },
+  { label: "privateLessons", to: "/$locale/private-lessons" },
+  { label: "contact", to: "/$locale/contact" },
 ];
 
 function NavItems({
@@ -35,37 +39,39 @@ function NavItems({
   className: string;
   onNavigate?: () => void;
 }) {
+  const locale = useLocale();
   return (
     <>
-      {items.map((item) =>
-        item.to ? (
-          <Link
-            key={item.label}
-            to={item.to}
-            onClick={onNavigate}
-            className={className}
-            activeProps={{ className: "text-gold" }}
-          >
-            {t[item.label]}
-          </Link>
-        ) : (
-          <a key={item.label} href={item.href} onClick={onNavigate} className={className}>
-            {t[item.label]}
-          </a>
-        ),
-      )}
+      {items.map((item) => (
+        <Link
+          key={item.label}
+          to={item.to}
+          params={{ locale }}
+          hash={item.hash}
+          onClick={onNavigate}
+          className={className}
+          activeProps={item.hash ? undefined : { className: "text-gold" }}
+        >
+          {t[item.label]}
+        </Link>
+      ))}
     </>
   );
 }
 
 export function SiteHeader({ brand, overlay = false }: Props) {
   const t = useMessages(commonMessages).nav;
+  const locale = useLocale();
   const [open, setOpen] = useState(false);
 
   return (
     <header className={overlay ? "absolute inset-x-0 top-0 z-10" : "bg-ink"}>
       <nav className="container mx-auto flex items-center justify-between px-6 py-5 text-ink-foreground">
-        <Link to="/" className="font-display text-xl font-bold uppercase tracking-wider">
+        <Link
+          to="/$locale"
+          params={{ locale }}
+          className="font-display text-xl font-bold uppercase tracking-wider"
+        >
           {brand}
         </Link>
 

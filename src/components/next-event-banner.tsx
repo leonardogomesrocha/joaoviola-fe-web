@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { enGB, es, pt } from "date-fns/locale";
-import { localeInfo, useLocale, useMessages, type Locale } from "@/i18n";
+import { localeInfo, localePath, useLocale, useMessages, type Locale } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
 import { countryName, flagUrl, toAlpha2 } from "@/lib/country-flag";
 import { siteConfigQuery } from "@/lib/site-config-api";
@@ -19,7 +19,7 @@ type Props = {
 };
 
 /** The next event's text. Renders nothing when there is no event. */
-export function NextEventBanner({ bookHref = "/contact" }: Props) {
+export function NextEventBanner({ bookHref }: Props) {
   const locale = useLocale();
   const t = useMessages(commonMessages).nextEvent;
 
@@ -53,7 +53,7 @@ export function NextEventBanner({ bookHref = "/contact" }: Props) {
       </span>
       <span className="mx-2 opacity-50">|</span>
       <a
-        href={bookHref}
+        href={bookHref ?? localePath(locale, "/contact")}
         className="font-medium text-promo-accent underline underline-offset-2 hover:opacity-80"
       >
         {t.book}

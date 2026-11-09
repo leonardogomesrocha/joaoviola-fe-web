@@ -16,6 +16,11 @@ export const localeInfo: Record<Locale, { label: string; flag: string; intl: str
   es: { label: "Español", flag: "ES", intl: "es-ES" },
 };
 
+/** Address of a page in a language: localePath("en", "/contact") → "/en/contact"; the home page is "". */
+export function localePath(locale: Locale, path = ""): string {
+  return `/${locale}${path === "/" ? "" : path}`;
+}
+
 export function isLocale(value: unknown): value is Locale {
   return typeof value === "string" && (locales as readonly string[]).includes(value);
 }

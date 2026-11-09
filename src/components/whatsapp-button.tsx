@@ -1,7 +1,7 @@
 import { useLocation } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { WhatsAppIcon } from "@/components/brand-icons";
-import { useMessages } from "@/i18n";
+import { locales, useMessages } from "@/i18n";
 import { commonMessages } from "@/i18n/messages/common";
 import { studioData } from "@/lib/studio-data";
 
@@ -21,7 +21,13 @@ export function WhatsAppButton() {
     setHref(`https://wa.me/${studioData.pt.contact.whatsapp}`);
   }, []);
 
-  if (!href || hiddenOn.has(pathname.replace(/\/$/, "") || "/")) return null;
+  if (
+    !href ||
+    hiddenOn.has(
+      pathname.replace(new RegExp(`^/(${locales.join("|")})`), "").replace(/\/$/, "") || "/",
+    )
+  )
+    return null;
 
   return (
     <a
