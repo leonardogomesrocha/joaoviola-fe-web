@@ -36,3 +36,10 @@ describe("Contact route", () => {
     expect(router.matchRoutes("/es/contact").at(-1)?.routeId).toBe("/$locale/contact");
   });
 });
+
+describe("Privacy route", () => {
+  it("matches a page for /pt/privacy", () => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+    expect(router.matchRoutes("/pt/privacy").at(-1)?.routeId).toBe("/$locale/privacy");
+  });
+});

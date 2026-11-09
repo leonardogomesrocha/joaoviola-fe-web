@@ -10,6 +10,7 @@ export const sitePages = [
   { path: "", changefreq: "weekly", priority: 1.0 },
   { path: "/private-lessons", changefreq: "monthly", priority: 0.8 },
   { path: "/contact", changefreq: "yearly", priority: 0.6 },
+  { path: "/privacy", changefreq: "yearly", priority: 0.3 },
 ] as const;
 
 export function getSiteUrl(fallbackOrigin?: string): string | undefined {

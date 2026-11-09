@@ -15,6 +15,7 @@ import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as LocaleIndexRouteImport } from './routes/$locale/index'
 import { Route as LocaleContactRouteImport } from './routes/$locale/contact'
+import { Route as LocalePrivacyRouteImport } from './routes/$locale/privacy'
 import { Route as LocalePrivateLessonsRouteImport } from './routes/$locale/private-lessons'
 
 const IndexRoute = IndexRouteImport.update({
@@ -47,6 +48,11 @@ const LocaleContactRoute = LocaleContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => LocaleRouteRoute,
 } as any)
+const LocalePrivacyRoute = LocalePrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => LocaleRouteRoute,
+} as any)
 const LocalePrivateLessonsRoute = LocalePrivateLessonsRouteImport.update({
   id: '/private-lessons',
   path: '/private-lessons',
@@ -59,6 +65,7 @@ export interface FileRoutesByFullPath {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
   '/$locale/': typeof LocaleIndexRoute
 }
@@ -67,6 +74,7 @@ export interface FileRoutesByTo {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
   '/$locale': typeof LocaleIndexRoute
 }
@@ -77,6 +85,7 @@ export interface FileRoutesById {
   '/robots.txt': typeof RobotsDottxtRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
   '/$locale/contact': typeof LocaleContactRoute
+  '/$locale/privacy': typeof LocalePrivacyRoute
   '/$locale/private-lessons': typeof LocalePrivateLessonsRoute
   '/$locale/': typeof LocaleIndexRoute
 }
@@ -88,6 +97,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/$locale/contact'
+    | '/$locale/privacy'
     | '/$locale/private-lessons'
     | '/$locale/'
   fileRoutesByTo: FileRoutesByTo
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/$locale/contact'
+    | '/$locale/privacy'
     | '/$locale/private-lessons'
     | '/$locale'
   id:
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/robots.txt'
     | '/sitemap.xml'
     | '/$locale/contact'
+    | '/$locale/privacy'
     | '/$locale/private-lessons'
     | '/$locale/'
   fileRoutesById: FileRoutesById
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LocaleContactRouteImport
       parentRoute: typeof LocaleRouteRoute
     }
+    '/$locale/privacy': {
+      id: '/$locale/privacy'
+      path: '/privacy'
+      fullPath: '/$locale/privacy'
+      preLoaderRoute: typeof LocalePrivacyRouteImport
+      parentRoute: typeof LocaleRouteRoute
+    }
     '/$locale/private-lessons': {
       id: '/$locale/private-lessons'
       path: '/private-lessons'
@@ -172,12 +191,14 @@ declare module '@tanstack/react-router' {
 
 interface LocaleRouteRouteChildren {
   LocaleContactRoute: typeof LocaleContactRoute
+  LocalePrivacyRoute: typeof LocalePrivacyRoute
   LocalePrivateLessonsRoute: typeof LocalePrivateLessonsRoute
   LocaleIndexRoute: typeof LocaleIndexRoute
 }
 
 const LocaleRouteRouteChildren: LocaleRouteRouteChildren = {
   LocaleContactRoute: LocaleContactRoute,
+  LocalePrivacyRoute: LocalePrivacyRoute,
   LocalePrivateLessonsRoute: LocalePrivateLessonsRoute,
   LocaleIndexRoute: LocaleIndexRoute,
 }

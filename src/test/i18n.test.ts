@@ -3,6 +3,7 @@ import { locales, matchLocale } from "@/i18n/config";
 import { commonMessages } from "@/i18n/messages/common";
 import { contactMessages } from "@/i18n/messages/contact";
 import { homeMessages } from "@/i18n/messages/home";
+import { legalMessages } from "@/i18n/messages/legal";
 import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
 import { studioData } from "@/lib/studio-data";
 
@@ -26,6 +27,7 @@ describe("i18n", () => {
     ["common", commonMessages],
     ["contact", contactMessages],
     ["home", homeMessages],
+    ["legal", legalMessages],
     ["private-lessons", privateLessonsMessages],
     ["studio data", studioData],
   ])("%s has the same texts in every language", (_, messages) => {

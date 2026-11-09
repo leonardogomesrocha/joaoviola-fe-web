@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { CookieBanner } from "@/components/cookie-banner";
+import { LegalFooter } from "@/components/legal-footer";
 import { TopBar } from "@/components/top-bar";
 import { WhatsAppButton } from "@/components/whatsapp-button";
 import { useLocale } from "@/i18n";
@@ -129,7 +131,9 @@ function RootComponent() {
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <TopBar />
       <Outlet />
+      <LegalFooter />
       <WhatsAppButton />
+      <CookieBanner />
     </QueryClientProvider>
   );
 }
