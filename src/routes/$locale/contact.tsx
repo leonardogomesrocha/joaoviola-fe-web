@@ -2,7 +2,10 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { ArrowUpRight, Mail } from "lucide-react";
 import { useCallback, useEffect, useState, type ReactNode } from "react";
-import hero from "@/assets/hero.jpg";
+import heroAvif from "@/assets/hero.avif";
+import heroAvif960 from "@/assets/hero-960.avif";
+import heroWebp from "@/assets/hero.webp";
+import heroWebp960 from "@/assets/hero-960.webp";
 import { InstagramIcon, WhatsAppIcon } from "@/components/brand-icons";
 import { ContactForm } from "@/components/contact/contact-form";
 import { SiteHeader } from "@/components/site-header";
@@ -123,13 +126,19 @@ function ContactPage() {
 
         <div className="relative mt-12 grid items-start gap-12 lg:grid-cols-[3fr_2fr]">
           <ContactForm />
-          <img
-            src={hero}
-            alt={t.imageAlt}
-            width={1920}
-            height={1088}
-            className="hidden aspect-[4/5] w-full rounded-2xl rounded-br-[3rem] object-cover lg:block"
-          />
+          <picture>
+            <source type="image/avif" srcSet={`${heroAvif960} 960w, ${heroAvif} 1920w`} sizes="40vw" />
+            <source type="image/webp" srcSet={`${heroWebp960} 960w, ${heroWebp} 1920w`} sizes="40vw" />
+            <img
+              src={heroWebp}
+              alt={t.imageAlt}
+              width={1920}
+              height={1088}
+              loading="lazy"
+              decoding="async"
+              className="hidden aspect-[4/5] w-full rounded-2xl rounded-br-[3rem] object-cover lg:block"
+            />
+          </picture>
         </div>
       </main>
 

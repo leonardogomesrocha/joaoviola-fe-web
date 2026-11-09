@@ -2,10 +2,10 @@ import { ChevronRight, Lightbulb, MessageCircle, User, Video, type LucideIcon } 
 import { SectionLabel } from "@/components/section-label";
 import { useMessages } from "@/i18n";
 import { privateLessonsMessages } from "@/i18n/messages/private-lessons";
-import feedback from "@/assets/private-lessons/feedback.jpg";
-import session from "@/assets/private-lessons/session.jpg";
-import tips from "@/assets/private-lessons/tips.jpg";
-import videoAnalysis from "@/assets/private-lessons/video-analysis.jpg";
+import feedback from "@/assets/private-lessons/feedback.webp";
+import session from "@/assets/private-lessons/session.webp";
+import tips from "@/assets/private-lessons/tips.webp";
+import videoAnalysis from "@/assets/private-lessons/video-analysis.webp";
 
 /**
  * Photos for the 2x2 grid, in the same order as the tile labels

@@ -11,7 +11,10 @@ import {
   Users,
   Droplets,
 } from "lucide-react";
-import hero from "@/assets/hero.jpg";
+import heroAvif from "@/assets/hero.avif";
+import heroAvif960 from "@/assets/hero-960.avif";
+import heroWebp from "@/assets/hero.webp";
+import heroWebp960 from "@/assets/hero-960.webp";
 import { type Plan, type ServiceGroup } from "@/lib/studio-data";
 import { studioQuery } from "@/lib/studio-query";
 import { SiteHeader } from "@/components/site-header";
@@ -144,13 +147,27 @@ function Index() {
         <SiteHeader brand={data.brand} overlay />
 
         <section className="relative flex min-h-[85vh] items-center overflow-hidden bg-ink">
-          <img
-            src={hero}
-            alt={t.hero.imageAlt}
-            width={1920}
-            height={1088}
-            className="absolute inset-0 size-full object-cover"
-          />
+          <picture>
+            <source
+              type="image/avif"
+              srcSet={`${heroAvif960} 960w, ${heroAvif} 1920w`}
+              sizes="100vw"
+            />
+            <source
+              type="image/webp"
+              srcSet={`${heroWebp960} 960w, ${heroWebp} 1920w`}
+              sizes="100vw"
+            />
+            <img
+              src={heroWebp}
+              alt={t.hero.imageAlt}
+              width={1920}
+              height={1088}
+              fetchPriority="high"
+              decoding="async"
+              className="absolute inset-0 size-full object-cover"
+            />
+          </picture>
           <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
           <div className="container relative mx-auto px-6 text-ink-foreground">
             <p className="font-display text-sm uppercase tracking-[0.3em] text-gold">
