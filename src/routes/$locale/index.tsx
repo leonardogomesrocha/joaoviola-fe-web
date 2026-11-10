@@ -66,7 +66,7 @@ function PlanCard({ plan }: { plan: Plan }) {
         <ul className="mt-3 space-y-1.5 text-muted-foreground">
           {plan.features.map((f) => (
             <li key={f} className="flex gap-2">
-              <span className="text-gold">•</span>
+              <span className="text-gold-strong">•</span>
               {f}
             </li>
           ))}
@@ -106,7 +106,9 @@ function ServiceCard({ group }: { group: ServiceGroup }) {
             <span className="rounded-md bg-gold px-3 py-1 font-display text-sm font-bold uppercase tracking-wider text-gold-foreground">
               {group.duo.badge}
             </span>
-            <span className="font-display text-2xl font-bold text-gold-strong">{group.duo.discount}</span>
+            <span className="font-display text-2xl font-bold text-gold-strong">
+              {group.duo.discount}
+            </span>
             <span className="max-w-[9rem] text-xs font-semibold uppercase leading-tight text-muted-foreground">
               {group.duo.note}
             </span>
@@ -114,20 +116,17 @@ function ServiceCard({ group }: { group: ServiceGroup }) {
         )}
       </div>
 
-      <ul className="mt-6 overflow-hidden rounded-xl border">
+      <ul className="mt-6 divide-y overflow-hidden rounded-xl border bg-background">
         {group.rows.map((r) => (
-          <li
-            key={r.label}
-            className="grid grid-cols-[minmax(0,1fr)_auto] items-center border-b last:border-b-0 sm:grid-cols-[minmax(0,1fr)_7rem_9rem]"
-          >
-            <span className="bg-ink px-5 py-4 font-display text-sm font-semibold uppercase tracking-wide text-ink-foreground">
+          <li key={r.label} className="flex items-center justify-between gap-4 px-5 py-4">
+            <span className="font-display text-base font-semibold uppercase tracking-wide">
               {r.label}
             </span>
-            <span className="px-5 py-4 text-right font-display text-xl font-bold sm:text-center">
-              {r.price} €
-            </span>
-            <span className="hidden px-5 py-4 text-sm text-muted-foreground sm:block">
-              {r.perSession ? `(${r.perSession})` : ""}
+            <span className="text-right">
+              <span className="font-display text-2xl font-bold">{r.price} €</span>
+              {r.perSession && (
+                <span className="block text-sm text-muted-foreground">{r.perSession}</span>
+              )}
             </span>
           </li>
         ))}

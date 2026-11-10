@@ -120,15 +120,23 @@ function ContactPage() {
           <QuoteMark />
           <h1 className="mt-4 font-display text-4xl font-bold uppercase leading-[1.05] sm:text-5xl md:text-6xl">
             {t.headline}
-            <span className="block text-gold">{t.highlight}</span>
+            <span className="block text-gold-strong">{t.highlight}</span>
           </h1>
         </div>
 
         <div className="relative mt-12 grid items-start gap-12 lg:grid-cols-[3fr_2fr]">
           <ContactForm />
           <picture>
-            <source type="image/avif" srcSet={`${heroAvif960} 960w, ${heroAvif} 1920w`} sizes="40vw" />
-            <source type="image/webp" srcSet={`${heroWebp960} 960w, ${heroWebp} 1920w`} sizes="40vw" />
+            <source
+              type="image/avif"
+              srcSet={`${heroAvif960} 960w, ${heroAvif} 1920w`}
+              sizes="40vw"
+            />
+            <source
+              type="image/webp"
+              srcSet={`${heroWebp960} 960w, ${heroWebp} 1920w`}
+              sizes="40vw"
+            />
             <img
               src={heroWebp}
               alt={t.imageAlt}

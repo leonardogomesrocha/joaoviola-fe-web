@@ -147,3 +147,7 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+
+# Claude Code skills (kept local, not committed)
+.claude/skills/

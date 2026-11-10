@@ -50,13 +50,13 @@ export function OfferSection() {
 
   return (
     <section className="py-20">
-      <SectionLabel number={1}>{t.label}</SectionLabel>
+      <SectionLabel>{t.label}</SectionLabel>
 
       <div className="mt-10">
         <QuoteMark />
         <h2 className="mt-4 max-w-4xl font-display text-3xl font-bold uppercase sm:text-4xl leading-[1.05] md:text-6xl">
           {t.headline}
-          <span className="block text-gold">{t.highlight}</span>
+          <span className="block text-gold-strong">{t.highlight}</span>
         </h2>
       </div>
 
@@ -76,7 +76,7 @@ export function OfferSection() {
                 <ul className="mt-3 space-y-2 text-muted-foreground">
                   {list.items.map((item) => (
                     <li key={item} className="flex items-center gap-2">
-                      <ChevronRight className="size-4 shrink-0 text-gold" />
+                      <ChevronRight className="size-4 shrink-0 text-gold-strong" />
                       {item}
                     </li>
                   ))}

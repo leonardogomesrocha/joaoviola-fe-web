@@ -52,6 +52,8 @@ export const contactMessages = defineMessages({
       message: "Mensagem",
       consent: "Aceito a utilização dos meus dados para efeitos de contacto.",
     },
+    choose: "Seleciona uma opção",
+    optional: "opcional",
     genders: { Male: "Masculino", Female: "Feminino" } as Options<typeof genders>,
     swimLevels: {
       Beginner: "Principiante",
@@ -114,6 +116,8 @@ export const contactMessages = defineMessages({
       message: "Message",
       consent: "I agree to the use of my data for contact purposes.",
     },
+    choose: "Select an option",
+    optional: "optional",
     genders: { Male: "Male", Female: "Female" } as Options<typeof genders>,
     swimLevels: {
       Beginner: "Beginner",
@@ -177,6 +181,8 @@ export const contactMessages = defineMessages({
       message: "Mensaje",
       consent: "Acepto el uso de mis datos con fines de contacto.",
     },
+    choose: "Selecciona una opción",
+    optional: "opcional",
     genders: { Male: "Masculino", Female: "Femenino" } as Options<typeof genders>,
     swimLevels: {
       Beginner: "Principiante",

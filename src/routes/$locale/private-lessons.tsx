@@ -68,7 +68,7 @@ function PrivateLessons() {
           <ul className="grid gap-4 md:grid-cols-2">
             {data.conditions.map((c, i) => (
               <li key={i} className="flex gap-4 rounded-xl border p-5">
-                <span className="font-display text-2xl font-bold text-gold">
+                <span className="font-display text-2xl font-bold text-gold-strong">
                   {String(i + 1).padStart(2, "0")}
                 </span>
                 <span className="text-muted-foreground">{c}</span>

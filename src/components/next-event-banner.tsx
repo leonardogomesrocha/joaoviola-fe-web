@@ -7,6 +7,7 @@ import { countryName, flagUrl, toAlpha2 } from "@/lib/country-flag";
 import { siteConfigQuery } from "@/lib/site-config-api";
 
 const dateLocales: Record<Locale, typeof pt> = { pt, en: enGB, es };
+const shortDateFormat = "d MMM yyyy";
 const dateFormats: Record<Locale, string> = {
   pt: "d 'de' MMMM 'de' yyyy",
   en: "d MMMM yyyy",
@@ -30,28 +31,34 @@ export function NextEventBanner({ bookHref }: Props) {
 
   const alpha2 = toAlpha2(event.countryPrefix, event.countryCode);
 
+  const date = new Date(event.date);
+  const dateLocale = { locale: dateLocales[locale] };
+
+  // Phones: one compact line (flag instead of country name, short date). Larger screens: full text.
   return (
-    <p role="region" aria-label={t.region}>
+    <p role="region" aria-label={t.region} className="leading-snug">
       <span className="font-semibold uppercase text-promo-accent">{t.label}:</span>{" "}
       <span>
         {event.name}
-        {alpha2 && <>, {countryName(alpha2, localeInfo[locale].intl)}</>}
+        {alpha2 && (
+          <span className="hidden sm:inline">, {countryName(alpha2, localeInfo[locale].intl)}</span>
+        )}
       </span>
       {alpha2 && (
         <img
           src={flagUrl(alpha2)}
-          alt=""
+          alt={countryName(alpha2, localeInfo[locale].intl)}
           width={20}
           height={15}
           className="ml-1.5 inline-block h-[0.9em] w-auto -translate-y-px align-middle"
         />
       )}
-      <span className="mx-2 opacity-50">|</span>
-      <span>
-        {t.from}{" "}
-        {format(new Date(event.date), dateFormats[locale], { locale: dateLocales[locale] })}
+      <span className="mx-1.5 opacity-50 sm:mx-2">|</span>
+      <span className="hidden sm:inline">
+        {t.from} {format(date, dateFormats[locale], dateLocale)}
       </span>
-      <span className="mx-2 opacity-50">|</span>
+      <span className="sm:hidden">{format(date, shortDateFormat, dateLocale)}</span>
+      <span className="mx-1.5 opacity-50 sm:mx-2">|</span>
       <a
         href={bookHref ?? localePath(locale, "/contact")}
         className="font-medium text-promo-accent underline underline-offset-2 hover:opacity-80"

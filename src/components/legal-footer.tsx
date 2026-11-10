@@ -9,12 +9,16 @@ export function LegalFooter() {
   const locale = useLocale();
 
   return (
-    <div className="border-t border-ink-foreground/10 bg-ink px-6 py-4 text-center text-xs text-ink-foreground/70">
-      <Link to="/$locale/privacy" params={{ locale }} className="hover:text-gold">
+    <div className="border-t border-ink-foreground/10 bg-ink px-6 py-2 text-center text-xs text-ink-foreground/70">
+      <Link to="/$locale/privacy" params={{ locale }} className="inline-block py-2 hover:text-gold">
         {t.privacy}
       </Link>
       <span className="mx-3 opacity-50">·</span>
-      <button type="button" onClick={openCookieSettings} className="cursor-pointer hover:text-gold">
+      <button
+        type="button"
+        onClick={openCookieSettings}
+        className="inline-block cursor-pointer py-2 hover:text-gold"
+      >
         {t.settings}
       </button>
     </div>

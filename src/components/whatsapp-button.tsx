@@ -35,7 +35,7 @@ export function WhatsAppButton() {
       target="_blank"
       rel="noreferrer"
       aria-label={t.label}
-      className="fixed bottom-5 left-5 z-50 inline-flex items-center gap-2.5 rounded-xl bg-[#25D366] px-4 py-3 font-semibold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#1EBE5A] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#25D366] focus-visible:ring-offset-2 md:px-5"
+      className="fixed bottom-5 left-5 z-50 inline-flex items-center gap-2.5 rounded-xl bg-[#0E7A40] px-4 py-3 font-semibold text-white shadow-lg shadow-black/20 transition hover:-translate-y-0.5 hover:bg-[#0B6A37] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0E7A40] focus-visible:ring-offset-2 md:px-5"
     >
       <WhatsAppIcon className="size-7" />
       <span className="hidden text-lg sm:inline">WhatsApp</span>

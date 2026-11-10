@@ -83,7 +83,7 @@ function PrivacyPage() {
           <button
             type="button"
             onClick={openCookieSettings}
-            className="mt-4 cursor-pointer text-sm font-medium text-gold underline underline-offset-2"
+            className="mt-4 cursor-pointer text-sm font-medium text-gold-strong underline underline-offset-2"
           >
             {t.cookies.manage}
           </button>

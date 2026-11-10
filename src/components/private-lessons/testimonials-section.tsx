@@ -18,12 +18,16 @@ export function TestimonialsSection() {
 
   return (
     <section className="pb-20">
-      <SectionLabel number={2}>{t.label}</SectionLabel>
+      <SectionLabel>{t.label}</SectionLabel>
       <h2 className="mt-6 font-display text-3xl font-bold uppercase md:text-4xl">{t.title}</h2>
 
       <ul
         className={`mt-10 grid gap-6 ${
-          t.items.length === 1 ? "max-w-2xl" : t.items.length === 2 ? "md:grid-cols-2" : "md:grid-cols-3"
+          t.items.length === 1
+            ? "max-w-2xl"
+            : t.items.length === 2
+              ? "md:grid-cols-2"
+              : "md:grid-cols-3"
         }`}
       >
         {t.items.map((item, i) => (
@@ -33,7 +37,7 @@ export function TestimonialsSection() {
                 {t.exampleBadge}
               </span>
             )}
-            <span aria-hidden className="font-display text-6xl leading-none text-gold">
+            <span aria-hidden className="font-display text-6xl leading-none text-gold-strong">
               “
             </span>
             <blockquote className="mt-2 flex-1 text-lg leading-relaxed text-foreground/85">

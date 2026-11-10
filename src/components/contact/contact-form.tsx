@@ -76,6 +76,7 @@ const defaults = {
   website: "",
 } as unknown as FormValues;
 
+const labelClass = "text-sm font-medium text-foreground";
 const fieldClass = "h-12 rounded-md border-border bg-white text-base shadow-none md:text-base";
 
 export function ContactForm() {
@@ -153,14 +154,9 @@ export function ContactForm() {
           name="firstName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">{t.fields.firstName}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.firstName}</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder={t.fields.firstName}
-                  autoComplete="given-name"
-                  className={fieldClass}
-                />
+                <Input {...field} autoComplete="given-name" className={fieldClass} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -171,14 +167,9 @@ export function ContactForm() {
           name="lastName"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">{t.fields.lastName}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.lastName}</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder={t.fields.lastName}
-                  autoComplete="family-name"
-                  className={fieldClass}
-                />
+                <Input {...field} autoComplete="family-name" className={fieldClass} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -189,15 +180,12 @@ export function ContactForm() {
           name="age"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">{t.fields.age}</FormLabel>
+              <FormLabel className={labelClass}>
+                {t.fields.age}{" "}
+                <span className="font-normal text-muted-foreground">({t.optional})</span>
+              </FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  placeholder={t.fields.age}
-                  inputMode="numeric"
-                  maxLength={3}
-                  className={fieldClass}
-                />
+                <Input {...field} inputMode="numeric" maxLength={3} className={fieldClass} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -207,8 +195,11 @@ export function ContactForm() {
           control={form.control}
           name="gender"
           render={({ field }) => (
-            <FormItem className="flex items-center">
-              <FormLabel className="sr-only">{t.fields.gender}</FormLabel>
+            <FormItem>
+              <FormLabel className={labelClass}>
+                {t.fields.gender}{" "}
+                <span className="font-normal text-muted-foreground">({t.optional})</span>
+              </FormLabel>
               <FormControl>
                 <RadioGroup
                   value={field.value ?? ""}
@@ -216,7 +207,10 @@ export function ContactForm() {
                   className="flex h-12 items-center gap-6"
                 >
                   {genders.map((g) => (
-                    <label key={g} className="flex cursor-pointer items-center gap-2 text-base">
+                    <label
+                      key={g}
+                      className="flex min-h-11 cursor-pointer items-center gap-2 pr-2 text-base"
+                    >
                       <RadioGroupItem value={g} />
                       {t.genders[g]}
                     </label>
@@ -231,15 +225,9 @@ export function ContactForm() {
           name="email"
           render={({ field }) => (
             <FormItem className="sm:col-span-2">
-              <FormLabel className="sr-only">{t.fields.email}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.email}</FormLabel>
               <FormControl>
-                <Input
-                  {...field}
-                  type="email"
-                  placeholder={t.fields.email}
-                  autoComplete="email"
-                  className={fieldClass}
-                />
+                <Input {...field} type="email" autoComplete="email" className={fieldClass} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -250,11 +238,11 @@ export function ContactForm() {
           name="swimLevel"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">{t.fields.swimLevel}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.swimLevel}</FormLabel>
               <Select value={field.value ?? ""} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger className={fieldClass}>
-                    <SelectValue placeholder={t.fields.swimLevel} />
+                    <SelectValue placeholder={t.choose} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -274,11 +262,11 @@ export function ContactForm() {
           name="freestyleTime"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="sr-only">{t.fields.freestyleTime}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.freestyleTime}</FormLabel>
               <Select value={field.value ?? ""} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger className={fieldClass}>
-                    <SelectValue placeholder={t.fields.freestyleTime} />
+                    <SelectValue placeholder={t.choose} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -298,11 +286,11 @@ export function ContactForm() {
           name="topic"
           render={({ field }) => (
             <FormItem className="sm:col-span-2">
-              <FormLabel className="sr-only">{t.fields.topic}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.topic}</FormLabel>
               <Select value={field.value ?? ""} onValueChange={field.onChange}>
                 <FormControl>
                   <SelectTrigger className={fieldClass}>
-                    <SelectValue placeholder={t.fields.topic} />
+                    <SelectValue placeholder={t.choose} />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
@@ -322,11 +310,10 @@ export function ContactForm() {
           name="message"
           render={({ field }) => (
             <FormItem className="sm:col-span-2">
-              <FormLabel className="sr-only">{t.fields.message}</FormLabel>
+              <FormLabel className={labelClass}>{t.fields.message}</FormLabel>
               <FormControl>
                 <Textarea
                   {...field}
-                  placeholder={t.fields.message}
                   rows={7}
                   maxLength={5000}
                   className="rounded-md border-border bg-white text-base shadow-none md:text-base"
@@ -347,7 +334,7 @@ export function ContactForm() {
           name="consentAccepted"
           render={({ field }) => (
             <FormItem className="sm:col-span-2">
-              <div className="flex items-start gap-3">
+              <div className="flex items-start gap-3 py-1">
                 <FormControl>
                   <Checkbox
                     checked={field.value}
@@ -355,7 +342,7 @@ export function ContactForm() {
                     className="mt-0.5"
                   />
                 </FormControl>
-                <FormLabel className="cursor-pointer text-base font-normal leading-snug">
+                <FormLabel className="cursor-pointer py-0.5 text-base font-normal leading-snug">
                   {t.fields.consent}
                 </FormLabel>
               </div>
